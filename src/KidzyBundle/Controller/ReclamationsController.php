@@ -173,7 +173,7 @@ class ReclamationsController extends Controller
         $pieChart->getData()->setArrayToDataTable(
             $data
         );
-        $pieChart->getOptions()->setTitle('Clubs ');
+        $pieChart->getOptions()->setTitle('Réclamation ');
         $pieChart->getOptions()->setHeight(500);
         $pieChart->getOptions()->setWidth(900);
         $pieChart->getOptions()->getTitleTextStyle()->setBold(true);
