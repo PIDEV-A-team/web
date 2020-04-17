@@ -105,13 +105,12 @@ class AvisController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
         $avis = $em->getRepository('KidzyBundle:Avis')->findAll();
+
         $aviss= $this->get('knp_paginator')->paginate($avis, $request->query->get( 'page',  1), 3);
+
         return $this->render('@Kidzy/avis/Mesavis.html.twig', array('parent' => $user,
             'avis' => $avis,
             'avis' => $aviss,
-
-
-
 
         ));
     }

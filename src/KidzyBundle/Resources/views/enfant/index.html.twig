@@ -61,6 +61,9 @@
                                                 <li>
                                                     <a href="{{ path('enfant_edit', { 'idEnfant': enfant.idEnfant }) }}"><i class="dripicons-pencil"></i> | Modifier</a>
                                                 </li>
+                                                <li>
+                                                    <a href="{{ path('print', { 'idEnfant': enfant.idEnfant } )}}"><i class="dripicons-print"></i> | Imprimer</a>
+                                                </li>
                                             </ul>
                                         </td>
                                     </tr>
@@ -69,6 +72,7 @@
                             </table>
 
                             <ul>
+
                                 <li>
                                     <a href="{{ path('enfant_new') }}">Ajouter Un Enfant</a>
                                 </li>

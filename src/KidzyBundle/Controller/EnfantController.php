@@ -8,6 +8,7 @@ use KidzyBundle\Entity\Classe;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use KidzyBundle\Repository\enfantRepository;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 
 class EnfantController extends Controller
 {
@@ -89,7 +90,7 @@ class EnfantController extends Controller
     }
 
     /**
-     * Creates a new garde entity.
+     * Creates a new enfant entity.
      *
      */
     public function newAction(Request $request)
@@ -104,8 +105,6 @@ class EnfantController extends Controller
             $enfant->setUpdatedAt($today);
             $em->persist($enfant);
             $em->flush();
-            $this->addFlash('success','Enfant ajouté avec succès ');
-
 
             return $this->redirectToRoute('enfant_show', array('idEnfant' => $enfant->getIdEnfant()));
         }
@@ -116,12 +115,13 @@ class EnfantController extends Controller
         ));
     }
 
-    public function enfantAction()
+    public function enfantAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $enfants = $em->getRepository('KidzyBundle:Enfant')->findAll();
+        $enfantss= $this->get('knp_paginator')->paginate($enfants, $request->query->get( 'page',  1), 3);
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
-        return $this->render('@Kidzy/enfant/enfant.html.twig' , array('enfants' => $enfants ,'parent' => $user ));
+        return $this->render('@Kidzy/enfant/enfant.html.twig' , array('enfants' => $enfants ,'parent' => $user, 'enfantss' => $enfantss ));
     }
 
     public function addAction(Request $request)
@@ -252,6 +252,26 @@ class EnfantController extends Controller
 
 
     }
+ public function printAction(Request $request)
+    {
 
+        $idEnfant = $request->get('idEnfant');
+        $em = $this->getDoctrine()->getManager();
+
+        $enfant = $em->getRepository('KidzyBundle:Enfant')->find($idEnfant);
+
+
+        $html = $this->renderView('@Kidzy/enfant/printEnfant.html.twig', array(
+
+            'enfant'  => $enfant,
+
+
+        ));
+
+        return new PdfResponse(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            'ListeEnfant.pdf'
+        );
+    }
 
 }

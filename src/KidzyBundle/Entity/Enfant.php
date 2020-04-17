@@ -121,7 +121,7 @@ class Enfant
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="enfants")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="enfants" )
      * @ORM\JoinColumn(name="id_parent", referencedColumnName="id")
      */
     private $idParent;
