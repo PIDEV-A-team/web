@@ -7,7 +7,7 @@ event_show:
     defaults: { _controller: "KidzyBundle:Event:show" }
     methods:  GET
 event_new:
-    path:     admin/new
+    path:     admin/neww
     defaults: { _controller: "KidzyBundle:Event:new" }
     methods:  [GET, POST]
 event_edit:

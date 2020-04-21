@@ -44,4 +44,6 @@ enfant_supprimer:
 enfant_search:
     path:     /search
     defaults: { _controller: "KidzyBundle:Enfant:search" }
-
+print:
+    path:     /print/ListeEnfant/{idEnfant}/
+    defaults: { _controller: "KidzyBundle:Enfant:print" }

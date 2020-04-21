@@ -98,10 +98,6 @@ class ReclamationsController extends Controller
             'rec' => $recc,
 
 
-
-
-
-
         ));
     }
     public function newAction(Request $request)
